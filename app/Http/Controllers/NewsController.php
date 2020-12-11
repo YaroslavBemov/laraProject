@@ -18,12 +18,12 @@ class NewsController extends Controller
     public function showAllNews()
     {
         $data = $this->newsArray;
-        return view('newsAll', compact('data'));
+        return view('pages.newsAll', compact('data'));
     }
 
     public function showOneNews($id)
     {
         $data = $this->newsArray[$id];
-        return view('newsOne', $data);
+        return view('pages.newsOne', $data);
     }
 }

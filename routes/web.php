@@ -18,9 +18,9 @@ Route::get('/', function () {
     return view('app');
 });
 
-Route::view('/about', 'about');
+Route::view('/about', 'pages.about');
 
-Route::view('/welcome', 'welcome');
+Route::view('/welcome', 'pages.welcome');
 
 Route::get('/news', [NewsController::class, 'showAllNews']);
 
