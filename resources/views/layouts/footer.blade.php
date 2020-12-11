@@ -1,4 +1,4 @@
-<footer class="text-muted">
+<footer class="footer mt-auto py-3 bg-light text-muted">
     <div class="container">
         <p class="float-right">
             <a href="#">Back to top</a>

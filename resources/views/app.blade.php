@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport"
@@ -10,15 +10,11 @@
     <link rel="stylesheet" href="./css/album.css">
     <title>App</title>
 </head>
-<body>
+<body class="d-flex flex-column h-100">
 
 @include('layouts.header')
 
-<div class="container">
-
-    @yield('content')
-
-</div>
+@yield('content')
 
 @include('layouts.footer')
 
@@ -26,7 +22,5 @@
         integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
         crossorigin="anonymous">
 </script>
-</body>
-
 </body>
 </html>

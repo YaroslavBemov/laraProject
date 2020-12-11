@@ -1,14 +1,19 @@
-
 @extends('app')
 
 @section('content')
 
-    <h1>Страница для вывода одной новости</h1>
+    <main class="flex-shrink-0">
+        <div class="album py-3">
+            <div class="container">
 
-    <h2>{{ $title }}</h2>
+                <h1>Страница для вывода одной новости</h1>
 
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Autem deleniti eius enim expedita id illum inventore iure
-        magnam maxime, numquam omnis porro rerum sed, totam voluptatibus. Exercitationem nostrum quae voluptatibus?
-    </p>
+                <h2>{{ $title }}</h2>
+
+                <p>{{ $description }}</p>
+
+            </div>
+        </div>
+    </main>
 
 @endsection
