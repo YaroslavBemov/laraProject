@@ -15,12 +15,13 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('app');
 });
 
 Route::view('/about', 'about');
 
+Route::view('/welcome', 'welcome');
+
 Route::get('/news', [NewsController::class, 'showAllNews']);
 
-
-//Route::get('/user/{id}', [UserController::class, 'show']);
+Route::get('/news/{id}', [NewsController::class, 'showOneNews']);

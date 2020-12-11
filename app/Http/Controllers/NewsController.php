@@ -4,14 +4,26 @@ namespace App\Http\Controllers;
 
 class NewsController extends Controller
 {
-    private array $newsArray = [];
+    private array $newsArray = [
+        1 => [
+            'id' => '1',
+            'title' => 'news 1'
+        ],
+        2 => [
+            'id' => '2',
+            'title' => 'news 2'
+        ],
+    ];
 
-    public function showAllNews() {
-        return view('news', $this->newsArray);
+    public function showAllNews()
+    {
+        $data = $this->newsArray;
+        return view('newsAll', compact('data'));
+    }
+
+    public function showOneNews($id)
+    {
+        $data = $this->newsArray[$id];
+        return view('newsOne', $data);
     }
 }
-
-
-//return view('user.profile', [
-//    'user' => User::findOrFail($id)
-//]);
