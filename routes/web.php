@@ -16,12 +16,22 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('app');
-});
+})->name('home');
 
-Route::view('/about', 'pages.about');
+Route::view('/about', 'static.about')
+    ->name('about');
 
-Route::view('/welcome', 'pages.welcome');
+Route::group([
+//    'prefix' => 'news',
+    'as' => 'news::'
+],
+    function () {
+        Route::get('/news', [NewsController::class, 'showAllNews'])->name('all');
 
-Route::get('/news', [NewsController::class, 'showAllNews']);
+        Route::get('/news/{id}', [NewsController::class, 'showOneNews'])->name('one');
 
-Route::get('/news/{id}', [NewsController::class, 'showOneNews']);
+        Route::get('/news/category/{categoryId}', [NewsController::class, 'showByCategory'])->name('byCategory');
+    }
+);
+
+

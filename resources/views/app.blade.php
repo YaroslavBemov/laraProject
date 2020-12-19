@@ -1,26 +1,18 @@
 <!doctype html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}" class="h-100">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-    <link rel="stylesheet" href="./css/album.css">
-    <title>App</title>
+    @include('parts.head')
 </head>
 <body class="d-flex flex-column h-100">
-
-@include('layouts.header')
-
-@yield('content')
-
-@include('layouts.footer')
-
-<script src="/docs/4.4/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-6khuMg9gaYr5AxOqhkVIODVIvm9ynTT5J4V1cfthmT+emCG6yVmEZsRHdxlotUnm"
-        crossorigin="anonymous">
-</script>
+<header>
+    @include('parts.header')
+</header>
+<main class="flex-shrink-0">
+    @include('static.welcome')
+    @yield('content')
+</main>
+<footer class="footer mt-auto py-3 bg-light text-muted">
+    @include('parts.footer')
+</footer>
 </body>
 </html>
