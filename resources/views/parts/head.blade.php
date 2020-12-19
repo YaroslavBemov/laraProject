@@ -9,4 +9,4 @@
         crossorigin="anonymous">
 </script>
 <link rel="stylesheet" href="./css/album.css">
-<title>App</title>
+<title>@section('title')@show</title>

@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    {{ $data['title'] }}
+@endsection
+
 @section('content')
 
     <div class="album py-3">

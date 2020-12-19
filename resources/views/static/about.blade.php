@@ -1,3 +1,7 @@
+@section('title')
+    О нас
+@endsection
+
 @extends('app')
 
 @section('content')

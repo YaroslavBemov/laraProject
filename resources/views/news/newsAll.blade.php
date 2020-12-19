@@ -1,5 +1,9 @@
 @extends('app')
 
+@section('title')
+    Новости
+@endsection
+
 @section('content')
 
     {{--Categories--}}

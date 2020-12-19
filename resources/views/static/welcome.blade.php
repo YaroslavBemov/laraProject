@@ -1,3 +1,7 @@
+@section('title')
+    My app
+@endsection
+
 @section('content')
 
     <div class="container">
