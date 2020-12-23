@@ -10,14 +10,37 @@
     <div class="container">
         <ul class="nav nav-pills nav-fill">
 
+            @php
+                $url = route('news::all');
+
+                $isActive = '';
+
+                if ($id == '') {
+                    $isActive = 'active';
+                }
+            @endphp
+
+            <li class="nav-item">
+                <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">All categories</a>
+            </li>
+
             @foreach($category as $key => $value)
 
                 @php
-                    $url = route('news::byCategory', ['categoryId' => $key])
+                    $url = route('news::byCategory', ['categoryId' => $key]);
+                    $isActive = '';
                 @endphp
 
+                @if($id == $key)
+
+                    @php
+                    $isActive = 'active';
+                    @endphp
+
+                @endif
+
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="{{ $url }}">{{ $value }}</a>
+                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $value }}</a>
                 </li>
 
             @endforeach

@@ -12,7 +12,8 @@ class NewsController extends Controller
         $category = (new News())->getCategory();
         return view('news.newsAll', [
             'data' => $data,
-            'category' => $category
+            'category' => $category,
+            'id' => ''
         ]);
     }
 
@@ -28,7 +29,8 @@ class NewsController extends Controller
         $category = (new News())->getCategory();
         return view('news.newsAll', [
             'data' => $data,
-            'category' => $category
+            'category' => $category,
+            'id' => $categoryId
         ]);
     }
 }
