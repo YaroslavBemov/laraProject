@@ -2,38 +2,38 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\News;
+
 class NewsController extends Controller
 {
-    private array $newsArray = [
-        1 => [
-            'id' => '1',
-            'title' => 'News 1',
-            'description' => 'Some quick example text to build on the card title and make up the
-                                    bulk of the card content.'
-        ],
-        2 => [
-            'id' => '2',
-            'title' => 'News 2',
-            'description' => 'Some quick example text to build on the card title and make up the
-                                    bulk of the card content.'
-        ],
-        3 => [
-            'id' => '3',
-            'title' => 'News 3',
-            'description' => 'Some quick example text to build on the card title and make up the
-                                    bulk of the card content.'
-        ]
-    ];
-
     public function showAllNews()
     {
-        $data = $this->newsArray;
-        return view('pages.newsAll', compact('data'));
+        $news = new News();
+        $data = $news->getAll();
+        $category = $news->getCategory();
+        return view('news.newsAll', [
+            'data' => $data,
+            'category' => $category,
+            'id' => ''
+        ]);
     }
 
     public function showOneNews($id)
     {
-        $data = $this->newsArray[$id];
-        return view('pages.newsOne', $data);
+        $news = new News();
+        $data = $news->getById($id);
+        return view('news.newsOne', ['data' => $data]);
+    }
+
+    public function showByCategory($categoryId)
+    {
+        $news = new News();
+        $data = $news->getByCategoryId($categoryId);
+        $category = $news->getCategory();
+        return view('news.newsAll', [
+            'data' => $data,
+            'category' => $category,
+            'id' => $categoryId
+        ]);
     }
 }
