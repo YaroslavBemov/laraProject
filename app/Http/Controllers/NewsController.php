@@ -8,8 +8,9 @@ class NewsController extends Controller
 {
     public function showAllNews()
     {
-        $data = (new News())->getAll();
-        $category = (new News())->getCategory();
+        $news = new News();
+        $data = $news->getAll();
+        $category = $news->getCategory();
         return view('news.newsAll', [
             'data' => $data,
             'category' => $category,
@@ -19,14 +20,16 @@ class NewsController extends Controller
 
     public function showOneNews($id)
     {
-        $data = (new News())->getById($id);
+        $news = new News();
+        $data = $news->getById($id);
         return view('news.newsOne', ['data' => $data]);
     }
 
     public function showByCategory($categoryId)
     {
-        $data = (new News())->getByCategoryId($categoryId);
-        $category = (new News())->getCategory();
+        $news = new News();
+        $data = $news->getByCategoryId($categoryId);
+        $category = $news->getCategory();
         return view('news.newsAll', [
             'data' => $data,
             'category' => $category,
