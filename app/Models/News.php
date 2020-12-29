@@ -4,6 +4,8 @@
 namespace App\Models;
 
 
+use Illuminate\Support\Facades\DB;
+
 class News
 {
     private array $newsArray = [
@@ -62,6 +64,11 @@ class News
 
     public function getCategory()
     {
-        return $this->category;
+        $data = DB::table('category')
+            ->select('id', 'title')
+            ->get()
+            ->toArray();
+//        dd($data);
+        return $data;
     }
 }

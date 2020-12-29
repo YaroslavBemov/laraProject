@@ -11,6 +11,7 @@ class NewsController extends Controller
         $news = new News();
         $data = $news->getAll();
         $category = $news->getCategory();
+
         return view('news.newsAll', [
             'data' => $data,
             'category' => $category,

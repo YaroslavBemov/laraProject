@@ -24,14 +24,15 @@
                 <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">All categories</a>
             </li>
 
-            @foreach($category as $key => $value)
+            @foreach($category as $key)
 
                 @php
-                    $url = route('news::byCategory', ['categoryId' => $key]);
+
+                    $url = route('news::byCategory', ['categoryId' => $key['id']]);
                     $isActive = '';
                 @endphp
 
-                @if($id == $key)
+                @if($id == $key['id'])
 
                     @php
                     $isActive = 'active';
@@ -40,7 +41,7 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $value }}</a>
+                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $key['title'] }}</a>
                 </li>
 
             @endforeach
