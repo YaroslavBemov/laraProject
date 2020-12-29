@@ -9,7 +9,7 @@ class NewsController extends Controller
     public function showAllNews()
     {
         $news = new News();
-        $data = $news->getAll();
+        $data = $news->getAllNews();
         $category = $news->getCategory();
 
         return view('news.newsAll', [
@@ -22,7 +22,7 @@ class NewsController extends Controller
     public function showOneNews($id)
     {
         $news = new News();
-        $data = $news->getById($id);
+        $data = $news->getNewsById($id);
         return view('news.newsOne', ['data' => $data]);
     }
 
