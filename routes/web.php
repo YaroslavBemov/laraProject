@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\{NewsController, FeedbackController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,4 +34,4 @@ Route::group([
     }
 );
 
-
+Route::post('/feedback', [FeedbackController::class, 'getFeedback'])->name('feedback');
