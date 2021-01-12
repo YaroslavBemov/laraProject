@@ -10,27 +10,27 @@ class NewsController extends Controller
     public function showAllNews()
     {
         $news = News::all();
-        $category = Category::all();
 
         return view('news.newsAll', [
             'data' => $news,
-            'category' => $category
         ]);
     }
 
     public function showOneNews($id)
     {
-        return view('news.newsOne', ['data' => News::find($id)]);
+        $news = News::find($id);
+
+        return view('news.newsOne', [
+            'data' => $news,
+            ]);
     }
 
     public function showByCategory($categoryId)
     {
         $news = Category::find($categoryId)->news;
-        $category = Category::all();
 
         return view('news.newsAll', [
             'data' => $news,
-            'category' => $category,
             'id' => $categoryId
         ]);
     }
