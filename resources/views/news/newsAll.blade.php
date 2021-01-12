@@ -35,7 +35,7 @@
                 @if($id == $key->id)
 
                     @php
-                    $isActive = 'active';
+                        $isActive = 'active';
                     @endphp
 
                 @endif
@@ -57,8 +57,9 @@
                 @forelse($data as $news => $item)
 
                     @php
-                        //dd($data);
                         $url = route('news::one', ['id' => $item->id]);
+                        $urlEdit = route('admin::news::update', ['id' => $item->id]);
+                        $urlDelete = route('admin::news::delete', ['id' => $item->id]);
                     @endphp
 
                     <div class="col-md-4">
@@ -75,8 +76,20 @@
                                 <p class="card-text">{{ $item->description }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
+
+                                        @empty($isAdmin)
+
                                         <a href="{{ $url }}" class="btn btn-sm btn-outline-secondary">View</a>
-                                        {{--                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>--}}
+
+                                        @endempty
+
+                                        @isset($isAdmin)
+
+                                            <a href="{{ $urlEdit }}" class="btn btn-sm btn-outline-secondary">Edit</a>
+                                            <a href="{{ $urlDelete }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+
+                                        @endisset
+
                                     </div>
                                     <small class="text-muted">{{ $item->time_to_read }} mins</small>
                                 </div>
