@@ -19,9 +19,11 @@ class NewsController extends Controller
     public function showOneNews($id)
     {
         $news = News::find($id);
+        $categoryId = $news->category_id;
 
         return view('news.newsOne', [
             'data' => $news,
+            'id' => $categoryId
             ]);
     }
 
