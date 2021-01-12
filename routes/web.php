@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\{NewsController, FeedbackController};
+use App\Http\Controllers\{NewsController, FeedbackController, AdminNewsController};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,15 +22,32 @@ Route::view('/about', 'static.about')
     ->name('about');
 
 Route::group([
-//    'prefix' => 'news',
+    'prefix' => 'news',
     'as' => 'news::'
 ],
     function () {
-        Route::get('/news', [NewsController::class, 'showAllNews'])->name('all');
+        Route::get('/', [NewsController::class, 'showAllNews'])->name('all');
 
-        Route::get('/news/{id}', [NewsController::class, 'showOneNews'])->name('one');
+        Route::get('/{id}', [NewsController::class, 'showOneNews'])->name('one');
 
-        Route::get('/news/category/{categoryId}', [NewsController::class, 'showByCategory'])->name('byCategory');
+        Route::get('/category/{categoryId}', [NewsController::class, 'showByCategory'])->name('byCategory');
+    }
+);
+
+Route::group([
+    'prefix' => 'admin/news',
+    'as' => 'admin::news::'
+],
+    function () {
+        Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+
+        Route::get('/create', [AdminNewsController::class, 'createNews'])->name('create');
+
+        Route::post('/store',[AdminNewsController::class, 'storeNews'])->name('store');
+
+        Route::get('/edit/{id}',[AdminNewsController::class, 'updateNews'])->name('update');
+
+        Route::get('/delete/{id}', [AdminNewsController::class, 'deleteNews'])->name('delete');
     }
 );
 

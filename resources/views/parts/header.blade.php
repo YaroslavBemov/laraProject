@@ -18,6 +18,15 @@
 
                 @endforeach
 
+                @isset($isAdmin)
+
+                        <li class="nav-item">
+                            <a class="nav-link active" aria-current="page"
+                               href="{{ route('admin::news::create') }}">Create news</a>
+                        </li>
+
+                @endisset
+
             </ul>
         </div>
     </div>

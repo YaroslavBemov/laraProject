@@ -4,42 +4,24 @@
 namespace App\Models;
 
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
-class News
+class News extends Model
 {
-//    private array $newsArray = [
-//        1 => [
-//            'id' => '1',
-//            'title' => 'News 1',
-//            'description' => 'Some quick example text to build on the card title and make up the
-//                                    bulk of the card content.',
-//            'category_id' => '1',
-//            'time_to_read' => '1'
-//        ],
-//        2 => [
-//            'id' => '2',
-//            'title' => 'News 2',
-//            'description' => 'Some quick example text to build on the card title and make up the
-//                                    bulk of the card content.',
-//            'category_id' => '2',
-//            'time_to_read' => '2'
-//        ],
-//        3 => [
-//            'id' => '3',
-//            'title' => 'News 3',
-//            'description' => 'Some quick example text to build on the card title and make up the
-//                                    bulk of the card content.',
-//            'category_id' => '3',
-//            'time_to_read' => '3'
-//        ]
-//    ];
+    protected $fillable = [
+        'id',
+        'title',
+        'description',
+        'category_id',
+        'time_to_read',
+        'content'
+    ];
 
-//    private array $category = [
-//        1 => 'Категория 1',
-//        2 => 'Категория 2',
-//        3 => 'Категория 3'
-//    ];
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
 
     public function getAllNews()
     {
