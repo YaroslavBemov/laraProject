@@ -24,14 +24,15 @@
                 <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">All categories</a>
             </li>
 
-            @foreach($category as $key => $value)
+            @foreach($category as $key)
 
                 @php
-                    $url = route('news::byCategory', ['categoryId' => $key]);
+
+                    $url = route('news::byCategory', ['categoryId' => $key->id]);
                     $isActive = '';
                 @endphp
 
-                @if($id == $key)
+                @if($id == $key->id)
 
                     @php
                     $isActive = 'active';
@@ -40,7 +41,7 @@
                 @endif
 
                 <li class="nav-item">
-                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $value }}</a>
+                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $key->title }}</a>
                 </li>
 
             @endforeach
@@ -56,7 +57,8 @@
                 @forelse($data as $news => $item)
 
                     @php
-                        $url = route('news::one', ['id' => $item['id']]);
+                        //dd($data);
+                        $url = route('news::one', ['id' => $item->id]);
                     @endphp
 
                     <div class="col-md-4">
@@ -69,14 +71,14 @@
                                 <text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text>
                             </svg>
                             <div class="card-body">
-                                <h5 class="card-title">{{ $item['title'] }}</h5>
-                                <p class="card-text">{{ $item['description'] }}</p>
+                                <h5 class="card-title">{{ $item->title }}</h5>
+                                <p class="card-text">{{ $item->description }}</p>
                                 <div class="d-flex justify-content-between align-items-center">
                                     <div class="btn-group">
                                         <a href="{{ $url }}" class="btn btn-sm btn-outline-secondary">View</a>
                                         {{--                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>--}}
                                     </div>
-                                    <small class="text-muted">{{ $item['time_to_read'] }} mins</small>
+                                    <small class="text-muted">{{ $item->time_to_read }} mins</small>
                                 </div>
                             </div>
                         </div>
