@@ -2,37 +2,34 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\News;
 
 class NewsController extends Controller
 {
     public function showAllNews()
     {
-        $news = new News();
-        $data = $news->getAllNews();
-        $category = $news->getCategory();
+        $news = News::all();
+        $category = Category::all();
 
         return view('news.newsAll', [
-            'data' => $data,
-            'category' => $category,
-            'id' => ''
+            'data' => $news,
+            'category' => $category
         ]);
     }
 
     public function showOneNews($id)
     {
-        $news = new News();
-        $data = $news->getNewsById($id);
-        return view('news.newsOne', ['data' => $data]);
+        return view('news.newsOne', ['data' => News::find($id)]);
     }
 
     public function showByCategory($categoryId)
     {
-        $news = new News();
-        $data = $news->getByCategoryId($categoryId);
-        $category = $news->getCategory();
+        $news = Category::find($categoryId)->news;
+        $category = Category::all();
+
         return view('news.newsAll', [
-            'data' => $data,
+            'data' => $news,
             'category' => $category,
             'id' => $categoryId
         ]);

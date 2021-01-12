@@ -12,36 +12,22 @@
 
             @php
                 $url = route('news::all');
-
-                $isActive = '';
-
-                if ($id == '') {
-                    $isActive = 'active';
-                }
+                $active = isset($id) ? '' : 'active';
             @endphp
 
             <li class="nav-item">
-                <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">All categories</a>
+                <a class="nav-link {{ $active }}" aria-current="page" href="{{ $url }}">All categories</a>
             </li>
 
             @foreach($category as $key)
 
                 @php
-
                     $url = route('news::byCategory', ['categoryId' => $key->id]);
-                    $isActive = '';
+                    $active = isset($id) && $id == $key->id ? 'active' : '';
                 @endphp
 
-                @if($id == $key->id)
-
-                    @php
-                        $isActive = 'active';
-                    @endphp
-
-                @endif
-
                 <li class="nav-item">
-                    <a class="nav-link {{ $isActive }}" aria-current="page" href="{{ $url }}">{{ $key->title }}</a>
+                    <a class="nav-link {{ $active }}" aria-current="page" href="{{ $url }}">{{ $key->title }}</a>
                 </li>
 
             @endforeach
@@ -79,14 +65,15 @@
 
                                         @empty($isAdmin)
 
-                                        <a href="{{ $url }}" class="btn btn-sm btn-outline-secondary">View</a>
+                                            <a href="{{ $url }}" class="btn btn-sm btn-outline-secondary">View</a>
 
                                         @endempty
 
                                         @isset($isAdmin)
 
                                             <a href="{{ $urlEdit }}" class="btn btn-sm btn-outline-secondary">Edit</a>
-                                            <a href="{{ $urlDelete }}" class="btn btn-sm btn-outline-secondary">Delete</a>
+                                            <a href="{{ $urlDelete }}"
+                                               class="btn btn-sm btn-outline-secondary">Delete</a>
 
                                         @endisset
 

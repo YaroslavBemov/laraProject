@@ -27,7 +27,7 @@ class AdminNewsController extends Controller
         return view('news.createNews', [
             'news' => $news,
             'category' => $category,
-            'isAdmin' => true,
+            'isAdmin' => true
         ]);
     }
 
@@ -38,7 +38,8 @@ class AdminNewsController extends Controller
         $news->fill($request->all())->save();
 
         return redirect()->route('admin::news::update', [
-            'id' => $news->id
+            'id' => $news->id,
+            'isAdmin' => true
         ]);
     }
 
@@ -54,6 +55,8 @@ class AdminNewsController extends Controller
 
     public function deleteNews($id) {
         News::destroy([$id]);
-        return redirect()->route("admin::news::index");
+        return redirect()->route("admin::news::index", [
+            'isAdmin' => true
+        ]);
     }
 }
