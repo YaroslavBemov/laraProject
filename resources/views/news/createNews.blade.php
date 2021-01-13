@@ -11,6 +11,16 @@
 @section('content')
 
     <div class="container">
+
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    {{ $error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endforeach
+        @endif
+
         <form action="{{ $url }}" method="post">
             @csrf
 
@@ -43,16 +53,15 @@
 
                     @foreach($category as $item)
 
-                        @isset($news->category_id)
+                        @if(isset($news->category_id))
                             @if($news->category_id == $item->id)
                                 <option selected value="{{ $item->id }}">{{ $item->title }}</option>
                             @else
                                 <option value="{{ $item->id }}">{{ $item->title }}</option>
                             @endif
-                        @endisset
-
-
-
+                        @else
+                            <option value="{{ $item->id }}">{{ $item->title }}</option>
+                        @endif
 
                     @endforeach
 
