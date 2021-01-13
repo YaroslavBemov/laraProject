@@ -9,7 +9,7 @@ class NewsController extends Controller
 {
     public function showAllNews()
     {
-        $news = News::all();
+        $news = News::orderBy('updated_at', 'desc')->paginate(9);
 
         return view('news.newsAll', [
             'data' => $news,
@@ -24,12 +24,15 @@ class NewsController extends Controller
         return view('news.newsOne', [
             'data' => $news,
             'id' => $categoryId
-            ]);
+        ]);
     }
 
     public function showByCategory($categoryId)
     {
-        $news = Category::find($categoryId)->news;
+//        $news = Category::find($categoryId)->news;
+        $news = News::where('category_id', '=', $categoryId)
+            ->orderBy('updated_at', 'desc')
+            ->paginate(9);
 
         return view('news.newsAll', [
             'data' => $news,

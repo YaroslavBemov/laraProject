@@ -9,7 +9,6 @@
 </header>
 <main class="flex-shrink-0">
     @include('static.welcome')
-    @include('parts.nav')
     @yield('content')
 </main>
 <footer class="footer mt-auto py-3 bg-light text-muted">

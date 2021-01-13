@@ -1,5 +1,5 @@
 <div class="container">
-    <ul class="nav nav-pills nav-fill">
+    <ul class="nav nav-pills nav-fill mt-3">
 
         @php
             $url = route('news::all');

@@ -32,10 +32,17 @@
                     </div>
                     <div class="mb-3">
                         <label for="exampleFormControlTextarea1" class="form-label">Example textarea</label>
-                        <textarea class="form-control" name="text-content" id="exampleFormControlTextarea1" rows="3"></textarea>
+                        <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="3"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </form>
+
+                @if(session('success'))
+                    <div class="alert alert-success mt-3" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+
             </div>
 
         </div>

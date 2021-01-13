@@ -5,9 +5,13 @@
 @endsection
 
 @section('content')
+    @include('parts.nav')
 
     <div class="album py-3">
         <div class="container">
+
+            {{ $data->links() }}
+
             <div class="row">
 
                 @forelse($data as $news => $item)
@@ -59,6 +63,9 @@
                 @endforelse
 
             </div>
+
+            {{ $data->links() }}
+
         </div>
     </div>
 

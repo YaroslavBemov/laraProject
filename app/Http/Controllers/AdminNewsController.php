@@ -10,23 +10,18 @@ class AdminNewsController extends Controller
 {
     public function index()
     {
-        $news = new News();
-        $data = $news->getAllNews();
-        $category = $news->getCategory();
+        $news = News::orderBy('updated_at', 'desc')->paginate(9);
+
         return view('news.newsAll', [
-            'data' => $data,
-            'category' => $category,
-            'id' => '',
+            'data' => $news,
             'isAdmin' => true
         ]);
     }
 
     public function createNews() {
         $news = new News();
-        $category = $news->getCategory();
         return view('news.createNews', [
             'news' => $news,
-            'category' => $category,
             'isAdmin' => true
         ]);
     }

@@ -5,6 +5,7 @@
 @endsection
 
 @section('content')
+    @include('parts.nav')
 
     <div class="album py-3">
         <div class="container">
