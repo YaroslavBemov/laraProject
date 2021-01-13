@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class AdminStoreNewsRequest extends FormRequest
+class FeedbackRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -13,7 +13,7 @@ class AdminStoreNewsRequest extends FormRequest
      */
 //    public function authorize()
 //    {
-//        return true;
+//        return false;
 //    }
 
     /**
@@ -24,11 +24,8 @@ class AdminStoreNewsRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|min:10|max:100',
-            'description' => 'required|min:10|max:100',
-            'category_id' => 'required|exists:category,id|integer',
-            'time_to_read' => 'required|integer|max:60',
-            'content' => 'string|min:3'
+            'email' => 'email',
+            'content' => 'string|min:15|max:300'
         ];
     }
 }

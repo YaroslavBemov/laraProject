@@ -37,7 +37,7 @@ class AdminNewsController extends Controller
         return redirect()->route('admin::news::update', [
             'id' => $news->id,
             'isAdmin' => true
-        ]);
+        ])->withInput();
     }
 
     public function updateNews($id) {

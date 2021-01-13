@@ -9,7 +9,7 @@ class NewsController extends Controller
 {
     public function showAllNews()
     {
-        $news = News::orderBy('updated_at', 'desc')->paginate(9);
+        $news = News::where('is_active', '=', 'on')->orderBy('updated_at', 'desc')->paginate(9);
 
         return view('news.newsAll', [
             'data' => $news,
@@ -31,6 +31,7 @@ class NewsController extends Controller
     {
 //        $news = Category::find($categoryId)->news;
         $news = News::where('category_id', '=', $categoryId)
+            ->where('is_active', '=', 'on')
             ->orderBy('updated_at', 'desc')
             ->paginate(9);
 
