@@ -11,62 +11,75 @@
 @section('content')
 
     <div class="container">
-        <form action="{{ $url }}" method="post">
-            @csrf
 
-            @isset($news->id)
-                <input type="hidden" name="id" value="{{$news->id}}">
-            @endisset
+        @if ($errors->any())
+            @foreach ($errors->all() as $error)
+                <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    {{ $error }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endforeach
+        @endif
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Title" value="{{ $news->title }}">
-            </div>
+        {!! Form::open(['route' => 'admin::news::store']) !!}
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Description</label>
-                <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Description" value="{{ $news->description }}">
-            </div>
+        @isset($news->id)
+            <input type="hidden" name="id" value="{{$news->id}}">
+        @endisset
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Time to read</label>
-                <input type="text" name="time_to_read" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Time to read" value="{{ $news->time_to_read }}">
-            </div>
+        <div class="mb-3 mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            {!! Form::text('title', $news->title ?? old('title'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput1',
+                'placeholder' => 'Title'
+            ]) !!}
+        </div>
 
-            <div class="mb-3">
-                <span>Category</span>
-                <select class="form-select mt-2" aria-label="Default select example" name="category_id">
-                    <option selected>Select category</option>
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">Description</label>
+            {!! Form::text('description', $news->description ?? old('description'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput2',
+                'placeholder' => 'Description'
+            ]) !!}
+        </div>
 
-                    @foreach($category as $item)
+        <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label">Time to read</label>
+            {!! Form::text('time_to_read', $news->time_to_read ?? old('time_to_read'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput3',
+                'placeholder' => 'Time to read'
+            ]) !!}
+        </div>
 
-                        @isset($news->category_id)
-                            @if($news->category_id == $item->id)
-                                <option selected value="{{ $item->id }}">{{ $item->title }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endif
-                        @endisset
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
 
+            {!! Form::textarea('content', $news->content ?? old('content'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlTextarea1',
+                'rows' => '3',
+            ]) !!}
+        </div>
 
+        <div class="mb-3">
+            <span>Category</span>
+            {!! Form::select('category_id', $category->pluck('title', 'id'), $news->category_id, ['class' => 'form-select mt-2']) !!}
+        </div>
 
+        <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is active</label>
+            <input type="hidden" name="is_active" value="0">
+            {!! Form::checkbox('is_active', 1, $news->is_active, [
+                'class' => 'form-check-input',
+                'id' => 'flexSwitchCheckDefault'
+            ]) !!}
+        </div>
 
-                    @endforeach
+        <button type="submit" class="btn btn-primary mb-5 mt-3">Create</button>
 
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
-                          rows="3">{{ $news->content }}</textarea>
-            </div>
-
-            <button type="submit" class="btn btn-primary mb-5">Create</button>
-        </form>
-    </div>
+    {!! Form::close() !!}
 
 @endsection

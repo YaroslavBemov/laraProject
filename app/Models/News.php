@@ -15,7 +15,8 @@ class News extends Model
         'description',
         'category_id',
         'time_to_read',
-        'content'
+        'content',
+        'is_active'
     ];
 
     public function category()
