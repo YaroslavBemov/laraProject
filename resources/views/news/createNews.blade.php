@@ -21,80 +21,64 @@
             @endforeach
         @endif
 
-        @php
+        {!! Form::open(['url' => 'admin::news::store']) !!}
 
-        $title = $news->title ? $news->title : old('title');
-        $description = $news->description ? $news->description : old('description');
-        $time_to_read = $news->time_to_read ? $news->time_to_read : old('time_to_read');
-        $content = $news->content ? $news->content : old('content');
-        $isActive = $news->is_active == 'on' ? 'checked' : '';
-        @endphp
+        @isset($news->id)
+            <input type="hidden" name="id" value="{{$news->id}}">
+        @endisset
 
-        <form action="{{ $url }}" method="post">
-            @csrf
+        <div class="mb-3 mt-3">
+            <label for="exampleFormControlInput1" class="form-label">Title</label>
+            {!! Form::text('title', $news->title ?? old('title'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput1',
+                'placeholder' => 'Title'
+            ]) !!}
+        </div>
 
-            @isset($news->id)
-                <input type="hidden" name="id" value="{{$news->id}}">
-            @endisset
+        <div class="mb-3">
+            <label for="exampleFormControlInput2" class="form-label">Description</label>
+            {!! Form::text('description', $news->description ?? old('description'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput2',
+                'placeholder' => 'Description'
+            ]) !!}
+        </div>
 
-            <div class="mb-3 mt-3">
-                <label for="exampleFormControlInput1" class="form-label">Title</label>
-                <input type="text" name="title" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Title" value="{{ $title }}">
-            </div>
+        <div class="mb-3">
+            <label for="exampleFormControlInput3" class="form-label">Time to read</label>
+            {!! Form::text('time_to_read', $news->time_to_read ?? old('time_to_read'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlInput3',
+                'placeholder' => 'Time to read'
+            ]) !!}
+        </div>
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Description</label>
-                <input type="text" name="description" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Description" value="{{ $description }}">
-            </div>
+        <div class="mb-3">
+            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
 
-            <div class="mb-3">
-                <label for="exampleFormControlInput1" class="form-label">Time to read</label>
-                <input type="text" name="time_to_read" class="form-control" id="exampleFormControlInput1"
-                       placeholder="Time to read" value="{{ $time_to_read }}">
-            </div>
+            {!! Form::textarea('content', $news->content ?? old('content'), [
+                'class' => 'form-control',
+                'id' => 'exampleFormControlTextarea1',
+                'rows' => '3',
+            ]) !!}
+        </div>
 
-            <div class="mb-3">
-                <span>Category</span>
-                <select class="form-select mt-2" aria-label="Default select example" name="category_id">
-                    <option selected>Select category</option>
+        <div class="mb-3">
+            <span>Category</span>
+            {!! Form::select('category_id', $category->pluck('title', 'id'), $news->category_id, ['class' => 'form-select mt-2']) !!}
+        </div>
 
-                    @foreach($category as $item)
+        <div class="form-check form-switch">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Is active</label>
+            {!! Form::checkbox('is_active', 1, $news->is_active, [
+                'class' => 'form-check-input',
+                'id' => 'flexSwitchCheckDefault'
+            ]) !!}
+        </div>
 
-                        @if(isset($news->category_id))
-                            @if($news->category_id == $item->id)
-                                <option selected value="{{ $item->id }}">{{ $item->title }}</option>
-                            @else
-                                <option value="{{ $item->id }}">{{ $item->title }}</option>
-                            @endif
-                        @else
-                            <option value="{{ $item->id }}">{{ $item->title }}</option>
-                        @endif
+        <button type="submit" class="btn btn-primary mb-5 mt-3">Create</button>
 
-                    @endforeach
-
-                </select>
-            </div>
-
-            <div class="mb-3">
-                <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-                <textarea class="form-control" name="content" id="exampleFormControlTextarea1"
-                          rows="3">{{ $content }}</textarea>
-            </div>
-
-            <div class="form-check form-switch">
-                <input class="form-check-input"
-                       name="is_active"
-                       type="checkbox"
-                       id="flexSwitchCheckDefault"
-                    checked="{{ $isActive }}"
-                    >
-                <label class="form-check-label" for="flexSwitchCheckDefault">Is active</label>
-            </div>
-
-            <button type="submit" class="btn btn-primary mb-5 mt-3">Create</button>
-        </form>
-    </div>
+    {!! Form::close() !!}
 
 @endsection
