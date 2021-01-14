@@ -21,7 +21,7 @@
             @endforeach
         @endif
 
-        {!! Form::open(['url' => 'admin::news::store']) !!}
+        {!! Form::open(['route' => 'admin::news::store']) !!}
 
         @isset($news->id)
             <input type="hidden" name="id" value="{{$news->id}}">
@@ -71,6 +71,7 @@
 
         <div class="form-check form-switch">
             <label class="form-check-label" for="flexSwitchCheckDefault">Is active</label>
+            <input type="hidden" name="is_active" value="0">
             {!! Form::checkbox('is_active', 1, $news->is_active, [
                 'class' => 'form-check-input',
                 'id' => 'flexSwitchCheckDefault'
