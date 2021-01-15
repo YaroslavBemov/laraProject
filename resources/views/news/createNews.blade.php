@@ -28,40 +28,23 @@
         @endisset
 
         <div class="mb-3 mt-3">
-            <label for="exampleFormControlInput1" class="form-label">Title</label>
-            {!! Form::text('title', $news->title ?? old('title'), [
-                'class' => 'form-control',
-                'id' => 'exampleFormControlInput1',
-                'placeholder' => 'Title'
-            ]) !!}
+            {!! Form::label('title', 'Title', ['class' => 'form-label']) !!}
+            {!! Form::text('title', $news->title ?? old('title'), ['class' => 'form-control']) !!}
         </div>
 
         <div class="mb-3">
-            <label for="exampleFormControlInput2" class="form-label">Description</label>
-            {!! Form::text('description', $news->description ?? old('description'), [
-                'class' => 'form-control',
-                'id' => 'exampleFormControlInput2',
-                'placeholder' => 'Description'
-            ]) !!}
+            {!! Form::label('description', 'Description', ['class' => 'form-label']) !!}
+            {!! Form::text('description', $news->description ?? old('description'), ['class' => 'form-control']) !!}
         </div>
 
         <div class="mb-3">
-            <label for="exampleFormControlInput3" class="form-label">Time to read</label>
-            {!! Form::text('time_to_read', $news->time_to_read ?? old('time_to_read'), [
-                'class' => 'form-control',
-                'id' => 'exampleFormControlInput3',
-                'placeholder' => 'Time to read'
-            ]) !!}
+            {!! Form::label('time_to_read', 'Time to read', ['class' => 'form-label']) !!}
+            {!! Form::text('time_to_read', $news->time_to_read ?? old('time_to_read'), ['class' => 'form-control']) !!}
         </div>
 
         <div class="mb-3">
-            <label for="exampleFormControlTextarea1" class="form-label">Content</label>
-
-            {!! Form::textarea('content', $news->content ?? old('content'), [
-                'class' => 'form-control',
-                'id' => 'exampleFormControlTextarea1',
-                'rows' => '3',
-            ]) !!}
+            {!! Form::label('content', 'Content', ['class' => 'form-label']) !!}
+            {!! Form::textarea('content', $news->content ?? old('content'), ['class' => 'form-control', 'rows' => '3']) !!}
         </div>
 
         <div class="mb-3">
@@ -70,12 +53,9 @@
         </div>
 
         <div class="form-check form-switch">
-            <label class="form-check-label" for="flexSwitchCheckDefault">Is active</label>
+            {!! Form::label('is_active', 'Is active', ['class' => 'form-check-label']) !!}
             <input type="hidden" name="is_active" value="0">
-            {!! Form::checkbox('is_active', 1, $news->is_active, [
-                'class' => 'form-check-input',
-                'id' => 'flexSwitchCheckDefault'
-            ]) !!}
+            {!! Form::checkbox('is_active', 1, $news->is_active, ['class' => 'form-check-input']) !!}
         </div>
 
         <button type="submit" class="btn btn-primary mb-5 mt-3">Create</button>
