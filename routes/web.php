@@ -1,6 +1,11 @@
 <?php
 
-use App\Http\Controllers\{NewsController, FeedbackController, AdminNewsController};
+use App\Http\Controllers\{
+    NewsController,
+    FeedbackController,
+    AdminNewsController,
+    AdminUserController,
+};
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -34,21 +39,55 @@ Route::group([
     }
 );
 
-Route::group([
-    'prefix' => 'admin/news',
-    'as' => 'admin::news::'
-],
+Route::group(
+    [
+        'prefix' => 'admin',
+        'as' => 'admin::',
+        'middleware' => ['auth', 'role:1']
+    ],
     function () {
-        Route::get('/', [AdminNewsController::class, 'index'])->name('index');
+        Route::view('/', 'admin.index')->name('admin');
 
-        Route::get('/create', [AdminNewsController::class, 'createNews'])->name('create');
+        Route::group([
+            'prefix' => 'news',
+            'as' => 'news::'
+        ],
+            function () {
+                Route::get('/', [AdminNewsController::class, 'index'])->name('index');
 
-        Route::post('/store',[AdminNewsController::class, 'storeNews'])->name('store');
+                Route::get('/create', [AdminNewsController::class, 'createNews'])->name('create');
 
-        Route::get('/edit/{id}',[AdminNewsController::class, 'updateNews'])->name('update');
+                Route::post('/store',[AdminNewsController::class, 'storeNews'])->name('store');
 
-        Route::get('/delete/{id}', [AdminNewsController::class, 'deleteNews'])->name('delete');
+                Route::get('/edit/{id}',[AdminNewsController::class, 'updateNews'])->name('update');
+
+                Route::get('/delete/{id}', [AdminNewsController::class, 'deleteNews'])->name('delete');
+            }
+        );
+
+        Route::group([
+            'prefix' => 'users',
+            'as' => 'users::'
+        ],
+            function () {
+                Route::get('/', [AdminUserController::class, 'index'])->name('index');
+
+                Route::get('/create', [AdminUserController::class, 'createUser'])->name('create');
+
+                Route::post('/store',[AdminUserController::class, 'storeUser'])->name('store');
+
+                Route::get('/edit/{id}',[AdminUserController::class, 'updateUser'])->name('update');
+
+                Route::get('/delete/{id}', [AdminUserController::class, 'deleteUser'])->name('delete');
+            }
+        );
     }
 );
 
+
+
 Route::post('/feedback', [FeedbackController::class, 'getFeedback'])->name('feedback');
+
+Auth::routes();
+
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');

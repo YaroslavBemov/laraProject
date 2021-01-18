@@ -22,7 +22,7 @@ class AdminNewsController extends Controller
     public function createNews() {
         $news = new News();
 
-        return view('news.createNews', [
+        return view('admin.createNews', [
             'news' => $news,
             'isAdmin' => true
         ]);
@@ -43,7 +43,7 @@ class AdminNewsController extends Controller
     public function updateNews($id) {
         $news = News::find($id);
 
-        return view('news.createNews', [
+        return view('admin.createNews', [
             'news' => $news,
             'isAdmin' => true,
         ]);
